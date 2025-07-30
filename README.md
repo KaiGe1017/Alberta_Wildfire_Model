@@ -1,14 +1,46 @@
-# Alberta_Wildfire_Model
-Because wildfires in Alberta are very serious every year, I obtain public data for analysis and build a model to predict the final severity of wildfires based on the month, geographical location, cause of the wildfire, and weather. We hope that this model can help relevant personnel invest resources in a timely manner.
+# 🔥 Alberta Wildfire Prediction Model
 
-**Explaination for files:**
+Wildfires in Alberta pose a serious threat every year. This project uses public wildfire data to **analyze patterns and predict the final severity of wildfires** based on:
 
-##0. Background and case study file floder:
-   These files are the case studies from public resource. These help to understand the background and why we want to start do data analysis and modeling for this topic.
-   
-##1. Datasets:
-   historic data.csv/xlsx - <font color="blue">Raw data from open data in public website - Alberta Government. Using the data from 2006-2023 in this project.</font>
-   Pdf file - <font color="blue">The data dictionary from this website.</font>
-   SQL file - <font color="blue">For doing next analysis, author did some cleansing by the SQL query, for importing to Power BI.</font>
-   Excel dictionary - <font color="blue">Written by the author, contains the cleaned fields and derived fields. At the same time, another table contains the list of fields used in the model.</font>
-   
+- 📅 Month
+- 📍 Geographic location
+- 🔥 Cause of wildfire
+- 🌤️ Weather conditions
+
+We hope this model can help relevant authorities **allocate resources more effectively** and respond in a timely manner.
+
+---
+
+## 📁 File Structure & Explanation
+
+### 📘 0. Background & Case Study Folder
+Contains public case studies and documents to:
+- Understand the **context** of Alberta wildfires
+- Justify why **data analysis and modeling** is necessary
+
+---
+
+### 📊 1. Datasets
+
+- `historic_data.csv` / `historic_data.xlsx`  
+  📌 **Raw data** from the Alberta Government’s open data portal  
+  ⏳ Covers wildfire records from **2006–2023**
+
+- `wildfire_data_dictionary.pdf`  
+  📌 Official **data dictionary** from the public dataset website
+
+- `Data_prepration_cleansing_SQLquery.sql`  
+  📌 SQL scripts used for **data cleansing and import** to Power BI
+
+- `Wildfire_data_dictionary.xlsx`  
+  📌 **Authored by this project**  
+  📄 Includes:
+  - Cleaned and derived fields
+  - A list of features used for modeling
+
+---
+
+📌 _More details (EDA, modeling, performance reports) can be found in the corresponding notebooks and folders._
+
+🧠 *If you use this project, please remember to **cite the original repository**. Attribution matters!* ✅
+
