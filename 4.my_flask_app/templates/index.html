@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wildfire Size Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 300px;
+        }
+        label, input, select {
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Wildfire Size Prediction</h1>
+    <form id="predictionForm">
+        <label for="reported_month">Reported Month:</label>
+        <select id="reported_month" name="reported_month">
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+        </select>
+
+        <label for="forest_area">Forest Area:</label>
+        <select id="forest_area" name="forest_area">
+            <option value="Calgary">Calgary</option>
+            <option value="Edson">Edson</option>
+            <option value="Grande Prairie">Grande Prairie</option>
+            <option value="High Level">High Level</option>
+            <option value="Lac La Biche">Lac La Biche</option>
+            <option value="Fort McMurray">Fort McMurray</option>
+            <option value="Peace River">Peace River</option>
+            <option value="Rocky Mountain House">Rocky Mountain House</option>
+            <option value="Slave Lake">Slave Lake</option>
+            <option value="Whitecourt">Whitecourt</option>
+        </select>
+
+        <label for="fire_location_latitude">Fire Location Latitude:</label>
+        <input type="number" id="fire_location_latitude" name="fire_location_latitude" step="any">
+
+        <label for="fire_location_longitude">Fire Location Longitude:</label>
+        <input type="number" id="fire_location_longitude" name="fire_location_longitude" step="any">
+
+        <label for="general_cause_desc">General Cause Description:</label>
+        <select id="general_cause_desc" name="general_cause_desc">
+            <option value="Agriculture Industry">Agriculture Industry</option>
+            <option value="Forest Industry">Forest Industry</option>
+            <option value="Government">Government</option>
+            <option value="Incendiary">Incendiary</option>
+            <option value="Lightning">Lightning</option>
+            <option value="Oil & Gas Industry">Oil & Gas Industry</option>
+            <option value="Other Industry">Other Industry</option>
+            <option value="Power Line Industry">Power Line Industry</option>
+            <option value="Prescribed Fire">Prescribed Fire</option>
+            <option value="Railroad">Railroad</option>
+            <option value="Recreation">Recreation</option>
+            <option value="Resident">Resident</option>
+            <option value="Restart">Restart</option>
+            <option value="Under Investigation">Under Investigation</option>
+            <option value="Undetermined">Undetermined</option>
+        </select>
+
+        <label for="weather_conditions_over_fire">Weather Conditions Over Fire:</label>
+        <select id="weather_conditions_over_fire" name="weather_conditions_over_fire">
+            <option value="CB Wet">CB Wet</option>
+            <option value="CB Dry">CB Dry</option>
+            <option value="Cloudy">Cloudy</option>
+            <option value="Clear">Clear</option>
+            <option value="Rainshowers">Rainshowers</option>
+        </select>
+
+        <label for="temperature">Temperature:</label>
+        <input type="number" id="temperature" name="temperature" step="any">
+
+        <label for="relative_humidity">Relative Humidity:</label>
+        <input type="number" id="relative_humidity" name="relative_humidity" step="any">
+
+        <label for="wind_direction">Wind Direction:</label>
+        <select id="wind_direction" name="wind_direction">
+            <option value="W">W</option>
+            <option value="SW">SW</option>
+            <option value="SE">SE</option>
+            <option value="S">S</option>
+            <option value="NW">NW</option>
+            <option value="NE">NE</option>
+            <option value="N">N</option>
+            <option value="E">E</option>
+            <option value="CLM">CLM</option>
+        </select>
+
+        <label for="wind_speed">Wind Speed:</label>
+        <input type="number" id="wind_speed" name="wind_speed" step="any">
+
+        <button type="button" onclick="submitForm()">Predict</button>
+    </form>
+    <div class="result" id="result"></div>
+
+    <script>
+        function submitForm() {
+            const form = document.getElementById('predictionForm');
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(result => {
+                document.getElementById('result').innerText = `Predicted Size Class: ${result.predicted_size_class}`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
